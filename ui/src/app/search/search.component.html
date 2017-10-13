@@ -1,7 +1,4 @@
-
-<img src="../../assets/logo_onblue.png" class="img-responsive center-block">
-<br/>
-<h1 style="text-align: center">Online Rankings Database.</h1>
+<app-header></app-header>
 
 <form (ngSubmit)="onSubmit(searchForm)" [formGroup]="searchForm">
   <div class="form-group">
@@ -59,5 +56,6 @@
       <input type="checkbox" formControlName="equipped"> Equipped
     </label>
   </div>
+  <h3 *ngIf="message" class="text-danger text-center">{{message}}</h3>
   <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
 </form>

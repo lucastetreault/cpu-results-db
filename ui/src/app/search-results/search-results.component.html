@@ -1,0 +1,38 @@
+<table class="table table-striped table-condensed table-responsive">
+  <tr>
+    <th>Name</th>
+    <th>Contest</th>
+    <th>Date</th>
+    <th>Location</th>
+    <th>Competition</th>
+    <th>Sex</th>
+    <th>Province</th>
+    <th>Bodyweight</th>
+    <th>Retired Weight Class</th>
+    <th>Weight Class</th>
+    <th>Age Category</th>
+    <th>Squat</th>
+    <th>Bench</th>
+    <th>Deadlift</th>
+    <th>Total</th>
+    <th>Wilks</th>
+  </tr>
+  <tr *ngFor="let result of page.results">
+    <td>{{result.name}}</td>
+    <td>{{result.competition}}</td>
+    <td>{{result.date}}</td>
+    <td>{{result.location}}</td>
+    <td>{{result.competition_type}}</td>
+    <td>{{result.sex}}</td>
+    <td>{{result.province}}</td>
+    <td>{{result.weight}}</td>
+    <td>{{result.old_weight_class}}</td>
+    <td>{{result.weight_class}}</td>
+    <td>{{result.age_category}}</td>
+    <td>{{result.squat}}</td>
+    <td>{{result.bench}}</td>
+    <td>{{result.deadlift}}</td>
+    <td>{{result.total}}</td>
+    <td>{{result.wilks}}</td>
+  </tr>
+</table>

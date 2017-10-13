@@ -1,6 +1,6 @@
 CREATE DATABASE cpudb;
-GRANT USAGE ON *.* TO www@localhost IDENTIFIED BY 'weak ass password';
-GRANT ALL PRIVILEGES ON cpudb.* TO www@localhost;
+GRANT USAGE ON *.* TO www@'%' IDENTIFIED BY 'weak ass password';
+GRANT ALL PRIVILEGES ON cpudb.* TO www@'%';
 FLUSH PRIVILEGES;
 
 use cpudb;
@@ -16,7 +16,7 @@ CREATE TABLE results (
   province VARCHAR(3),
   weight DECIMAL,
   old_weight_class VARCHAR(4),
-  nweight_class VARCHAR(4),
+  weight_class VARCHAR(4),
   age_category VARCHAR(10),
   squat DECIMAL,
   bench DECIMAL,

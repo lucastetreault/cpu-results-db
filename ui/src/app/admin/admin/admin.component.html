@@ -1,0 +1,65 @@
+<app-header></app-header>
+<form (ngSubmit)="onSubmit(resultsForm)" [formGroup]="resultsForm">
+  <div class="form-group">
+    <label for="competition">Competition Name</label>
+    <input type="text" class="form-control" id="competition" formControlName="competition">
+  </div>
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="text" class="form-control" placeholder="yyyy/mm/dd" id="date" formControlName="date">
+  </div>
+  <div class="form-group">
+    <label for="date">Location</label>
+    <input type="text" class="form-control" formControlName="location">
+  </div>
+  <div class="form-group">
+    <label for="competition_type">Competition Type</label>
+    <select class="form-control" id="competition_type" formControlName="competition_type">
+      <option *ngFor="let competitionType of competitionTypes">{{competitionType}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="csv">Results</label>
+    <input id="csv" type='file' accept='text/plain' (change)="openFile($event)" formControlName="csv">
+  </div>
+  <table *ngIf="results" class="table table-striped table-condensed table-responsive">
+    <tr>
+      <th>Name</th>
+      <th>Contest</th>
+      <th>Date</th>
+      <th>Location</th>
+      <th>Competition</th>
+      <th>Sex</th>
+      <th>Province</th>
+      <th>Bodyweight</th>
+      <th>Weight Class</th>
+      <th>Age Category</th>
+      <th>Squat</th>
+      <th>Bench</th>
+      <th>Deadlift</th>
+      <th>Total</th>
+      <th>Wilks</th>
+    </tr>
+    <tr *ngFor="let result of results">
+      <td>{{result.name}}</td>
+      <td>{{resultsForm.controls.competition.value}}</td>
+      <td>{{resultsForm.controls.date.value}}</td>
+      <td>{{resultsForm.controls.location.value}}</td>
+      <td>{{resultsForm.controls.competition_type.value}}</td>
+      <td>{{result.sex}}</td>
+      <td>{{result.province}}</td>
+      <td>{{result.weight}}</td>
+      <td>{{result.weight_class}}</td>
+      <td>{{result.age_category}}</td>
+      <td>{{result.squat}}</td>
+      <td>{{result.bench}}</td>
+      <td>{{result.deadlift}}</td>
+      <td>{{result.total}}</td>
+      <td>{{result.wilks}}</td>
+    </tr>
+  </table>
+
+  <button type="submit" class="btn btn-default btn-primary">Upload Results to Database</button>
+  <p *ngIf="error" class="text-danger text-center">Username and/or password incorrect.</p>
+</form>
+
