@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
+import {ResultsService} from "../../results.service";
 
 @Component({
   selector: 'app-admin',
@@ -24,7 +25,7 @@ export class AdminComponent implements OnInit {
     M4: 'Master 4'
   };
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private resultsService:ResultsService) {
   }
 
   ngOnInit() {
@@ -75,8 +76,15 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  onSubmit(resultsForm) {
+  onSubmit({value}) {
+    let results = Object.assign({},this.results, {
+      competition: value.competition,
+      date: value.date,
+      location: value.location,
+      competition_type: value.competition_type
+    });
 
+    this.resultsService.create(results).subscribe(res => console.log(res));
   }
 }
 

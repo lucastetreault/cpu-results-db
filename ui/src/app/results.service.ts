@@ -51,4 +51,8 @@ export class ResultsService {
   nextPage(){
     return this.list(this.queryValues,++this.page.number);
   }
+
+  create(results){
+    return this.http.post('/api.php/results', results).map(res => res.json);
+  }
 }
