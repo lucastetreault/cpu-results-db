@@ -1,4 +1,7 @@
 <?php
+
+require 'auth.php'; // from the PHP-API-AUTH project, see: https://github.com/mevdschee/php-api-auth
+
 //var_dump($_SERVER['REQUEST_METHOD'],$_SERVER['PATH_INFO']); die();
 
 interface DatabaseInterface {
@@ -1798,6 +1801,19 @@ class PHP_CRUD_API {
             $this->swagger($this->settings);
         } else {
             $parameters = $this->getParameters($this->settings);
+
+            if($parameters['action']!='list' && $parameters['action']!='read'){
+                $auth = new PHP_API_AUTH(array(
+                    'authenticator'=>function($user,$pass){ $_SESSION['user']=($user=='admin' && $pass=='admin'); }
+                ));
+
+                $auth->executeCommand();
+                if (empty($_SESSION['user']) || !$auth->hasValidCsrfToken()) {
+                    header('HTTP/1.0 401 Unauthorized');
+                    exit(0);
+                }
+            }
+
             switch($parameters['action']){
                 case 'list': $output = $this->listCommand($parameters); break;
                 case 'read': $output = $this->readCommand($parameters); break;
@@ -1819,33 +1835,13 @@ class PHP_CRUD_API {
     }
 }
 
- require 'auth.php'; // from the PHP-API-AUTH project, see: https://github.com/mevdschee/php-api-auth
-
- $auth = new PHP_API_AUTH(array(
- 	'authenticator'=>function($user,$pass){ if ($user=='admin' && $pass=='admin') $_SESSION['user']=$user; }
- ));
- if ($auth->executeCommand()) exit(0);
- if (empty($_SESSION['user']) || !$auth->hasValidCsrfToken()) {
-	header('HTTP/1.0 401 Unauthorized');
-	exit(0);
- }
-
- $auth = new PHP_API_AUTH(array(
- 	'authenticator'=>function($user,$pass){ $_SESSION['user']=($user=='admin' && $pass=='admin'); }
- ));
-
- $auth->executeCommand();
- if (empty($_SESSION['user']) || !$auth->hasValidCsrfToken()) {
-	header('HTTP/1.0 401 Unauthorized');
-	exit(0);
- }
 
  $api = new PHP_CRUD_API(array(
  	'dbengine'=>'MySQL',
- 	'hostname'=>'localhost',
- 	'username'=>'',
- 	'password'=>'',
- 	'database'=>'',
+ 	'hostname'=>'mysql',
+ 	'username'=>'www',
+ 	'password'=>'weak ass password',
+ 	'database'=>'cpudb',
  	'charset'=>'utf8'
  ));
  $api->executeCommand();

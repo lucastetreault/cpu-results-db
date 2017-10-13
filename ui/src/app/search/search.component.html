@@ -1,0 +1,63 @@
+
+<img src="../../assets/logo_onblue.png" class="img-responsive center-block">
+<br/>
+<h1 style="text-align: center">Online Rankings Database.</h1>
+
+<form (ngSubmit)="onSubmit(searchForm)" [formGroup]="searchForm">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Name"  formControlName="year">
+  </div>
+  <div class="form-group">
+    <label for="competition">Contest</label>
+    <input type="text" class="form-control" id="competition" formControlName="competition">
+  </div>
+  <div class="form-group">
+    <label for="competition_type">Competition Type</label>
+    <select class="form-control" id="competition_type" formControlName="competition_type">
+      <option *ngFor="let competitionType of competitionTypes">{{competitionType}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="sex">Sex</label>
+    <select class="form-control" id="sex" formControlName="sex">
+      <option *ngFor="let sex of sexes">{{sex}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="province">Province</label>
+    <select class="form-control" id="province" formControlName="province">
+      <option *ngFor="let province of provinces">{{province}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="age_category">Age Category:</label>
+    <select class="form-control" id="age_category" formControlName="age_category">
+      <option *ngFor="let ageCategory of ageCategories">{{ageCategory}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="weight_class">Weight Class:</label>
+    <select class="form-control" id="weight_class" formControlName="weight_class">
+      <option *ngFor="let weightClass of newWeightClasses">{{weightClass}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="old_weight_class">Retired Weight Class:</label>
+    <select class="form-control" id="old_weight_class" formControlName="old_weight_class">
+      <option *ngFor="let oldWeightClass of oldWeightClasses">{{oldWeightClass}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="year">Year:</label>
+    <select class="form-control" id="year" formControlName="year">
+      <option *ngFor="let year of years">{{year}}</option>
+    </select>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" formControlName="equipped"> Equipped
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
+</form>
